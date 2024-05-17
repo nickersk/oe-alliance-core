@@ -1,4 +1,4 @@
-From 2d628ef8e04ba00239a8321622dd94581470d64a Mon Sep 17 00:00:00 2001
+From 14bd7b6ec29afd26712662e906535d8a1105d6c1 Mon Sep 17 00:00:00 2001
 From: NickerSK <nickersk@gmail.com>
 Date: Thu, 27 Apr 2023 12:02:13 +0200
 Subject: [PATCH] kodi - use master branch for Omega rc releases
@@ -8,10 +8,10 @@ Subject: [PATCH] kodi - use master branch for Omega rc releases
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 59d7d30..d9c8a69 100644
+index eb648e9a27..ce09879c74 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -310,7 +310,7 @@ endif()
+@@ -343,7 +343,7 @@ endif()
  # Generate messages
  core_add_subdirs_from_filelist(${CMAKE_SOURCE_DIR}/cmake/messages/flatbuffers/*.txt)
  
