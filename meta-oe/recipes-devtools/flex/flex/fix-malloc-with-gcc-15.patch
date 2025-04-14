@@ -1,0 +1,13 @@
+--- a/lib/malloc.c
++++ b/lib/malloc.c
+@@ -2,8 +2,9 @@
+      #undef malloc
+      
+      #include <sys/types.h>
++     #include <stdlib.h>
+      
+-     void *malloc ();
++     void *malloc (size_t n);
+      
+      /* Allocate an N-byte block of memory from the heap.
+         If N is zero, allocate a 1-byte block.  */

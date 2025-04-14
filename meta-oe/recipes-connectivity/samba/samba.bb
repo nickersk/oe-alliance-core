@@ -91,6 +91,7 @@ EXTRA_OECONF += "--disable-cups \
                  --with-pam_smbpass \
                 "
 
+CFLAGS += "-std=gnu17"
 LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 
 CONFIGUREOPTS = " --prefix=${prefix} \

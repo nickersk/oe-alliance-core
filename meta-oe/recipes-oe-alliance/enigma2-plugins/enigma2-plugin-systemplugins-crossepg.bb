@@ -25,7 +25,7 @@ inherit python3-dir
 
 S = "${WORKDIR}/git"
 
-CFLAGS:append = " -I${STAGING_INCDIR}/libxml2/ -I${STAGING_INCDIR}/${PYTHON_DIR}/"
+CFLAGS:append = " -std=gnu17 -I${STAGING_INCDIR}/libxml2/ -I${STAGING_INCDIR}/${PYTHON_DIR}/"
 CFLAGS:append = " ${@bb.utils.contains('BRAND_OEM', 'xtrend', ' -DNO_DVB_POLL' , '', d)}"
 CFLAGS:append = " ${@bb.utils.contains('BRAND_OEM', 'xp', ' -DNO_DVB_POLL' , '', d)}"
 CFLAGS:append = " ${@bb.utils.contains('BRAND_OEM', 'skylake', ' -DNO_DVB_POLL' , '', d)}"

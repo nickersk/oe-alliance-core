@@ -3,6 +3,7 @@ inherit upx-compress
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://ftp.service"
 
+CFLAGS += "-std=gnu17"
 LDFLAGS:append =" -lssl -lcrypto"
 
 do_configure:prepend() {

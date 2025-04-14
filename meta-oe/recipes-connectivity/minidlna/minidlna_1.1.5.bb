@@ -22,6 +22,8 @@ SRC_URI[sha256sum] = "8477ad0416bb2af5cd8da6dde6c07ffe1a413492b7fe40a362bc8587be
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
+CFLAGS += "-std=gnu17"
+
 inherit autotools-brokensep gettext update-rc.d
 
 PACKAGES =+ "${PN}-utils"

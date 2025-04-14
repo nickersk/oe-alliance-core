@@ -30,6 +30,8 @@ do_extraunpack() {
 }
 addtask extraunpack before do_configure after do_unpack
 
+CFLAGS += "-std=gnu17"
+
 EXTRA_OEMAKE = "'CC=${CC}' 'LD=${LD}' 'XCFLAGS=${CFLAGS}' 'XLDFLAGS=${LDFLAGS} -Wl,-soname=libjs' \
                 'BUILD_CC=${BUILD_CC}' 'BUILD_CFLAGS=${BUILD_CFLAGS}' 'BUILD_LDFLAGS=${BUILD_LDFLAGS}'"
 
