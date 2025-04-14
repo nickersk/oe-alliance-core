@@ -30,6 +30,7 @@ SRC_URI = "https://source.mynonpublic.com/vuplus/release/kernel/stblinux-${KV}.t
     file://kernel-add-support-for-gcc12.patch \
     file://kernel-add-support-for-gcc13.patch \
     file://kernel-add-support-for-gcc14.patch \
+    file://kernel-add-support-for-gcc15.patch \
     file://build-with-gcc12-fixes.patch \
     file://rt2800usb_fix_warn_tx_status_timeout_to_dbg.patch \
     file://add-dmx-source-timecode.patch \
@@ -98,6 +99,7 @@ KERNEL_OUTPUT = "vmlinux"
 KERNEL_IMAGETYPE = "vmlinux"
 KERNEL_IMAGEDEST = "tmp"
 
+KERNEL_CC:append = " -std=gnu17"
 KERNEL_EXTRA_ARGS = "EXTRA_CFLAGS=-Wno-attribute-alias"
 
 FILES:${KERNEL_PACKAGE_NAME}-image = "/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}.gz"
