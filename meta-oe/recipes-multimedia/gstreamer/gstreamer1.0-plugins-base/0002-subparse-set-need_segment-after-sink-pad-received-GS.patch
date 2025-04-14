@@ -1,7 +1,8 @@
-From 8a2404f78282bdbc16e8f0afac10cf83f24517ba Mon Sep 17 00:00:00 2001
+From 68f5490b291de82ac2ab385ba31264b59d6e4bdd Mon Sep 17 00:00:00 2001
 From: Mingke Wang <mingke.wang@freescale.com>
 Date: Thu, 19 Mar 2015 14:20:26 +0800
 Subject: [PATCH] subparse: set need_segment after sink pad received
+
  GST_EVENT_SEGMENT
 
 subparse works in push mode, chain funciton will be called once
@@ -13,7 +14,6 @@ be send out to down stream from the beginning.
 Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=747498]
 
 Signed-off-by: Mingke Wang <mingke.wang@freescale.com>
-
 ---
  gst/subparse/gstsubparse.c | 26 ++++++++++++--------------
  1 file changed, 12 insertions(+), 14 deletions(-)
@@ -22,12 +22,12 @@ Signed-off-by: Mingke Wang <mingke.wang@freescale.com>
 diff --git a/gst/subparse/gstsubparse.c b/gst/subparse/gstsubparse.c
 old mode 100644
 new mode 100755
-index 7aa922c..2a6595d
+index 7d286ed..498fb3d
 --- a/gst/subparse/gstsubparse.c
 +++ b/gst/subparse/gstsubparse.c
-@@ -275,24 +275,20 @@ gst_sub_parse_src_event (GstPad * pad, GstObject * parent, GstEvent * event)
-         goto beach;
-       }
+@@ -278,24 +278,20 @@ gst_sub_parse_src_event (GstPad * pad, GstObject * parent, GstEvent * event)
+       if (ret)
+         break;
  
 +      /* Apply the seek to our segment */
 +      gst_segment_do_seek (&self->segment, rate, format, flags,
@@ -58,7 +58,7 @@ index 7aa922c..2a6595d
          GST_WARNING_OBJECT (self, "seek to 0 bytes failed");
        }
  
-@@ -1806,10 +1802,12 @@ gst_sub_parse_sink_event (GstPad * pad, GstObject * parent, GstEvent * event)
+@@ -1814,10 +1810,12 @@ gst_sub_parse_sink_event (GstPad * pad, GstObject * parent, GstEvent * event)
        gst_event_parse_segment (event, &s);
        if (s->format == GST_FORMAT_TIME)
          gst_event_copy_segment (event, &self->segment);
