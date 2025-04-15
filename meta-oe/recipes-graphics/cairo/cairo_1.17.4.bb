@@ -66,6 +66,8 @@ EXTRA_OECONF += " \
     --enable-tee \
 "
 
+CFLAGS += "-std=gnu17"
+
 # We don't depend on binutils so we need to disable this
 export ac_cv_lib_bfd_bfd_openr="no"
 # Ensure we don't depend on LZO
