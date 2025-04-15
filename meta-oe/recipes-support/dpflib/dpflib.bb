@@ -23,23 +23,12 @@ PKGV = "4.0.+git${GITPKGV}"
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}include -I${S}src 'BUILDDIR=${S}'"
-
-EXTRA_OECONF = " \
-        BUILD_SYS=${BUILD_SYS} \
-        HOST_SYS=${HOST_SYS} \
-        STAGING_INCDIR=${STAGING_INCDIR} \
-        STAGING_LIBDIR=${STAGING_LIBDIR} \
-        DEVLIB=${S} \
-"
-
-do_configure:prepend() {
-    export BUILD_SYS=${BUILD_SYS}
-    export HOST_SYS=${HOST_SYS}
-    export STAGING_INCDIR=${STAGING_INCDIR}
-    export STAGING_LIBDIR=${STAGING_LIBDIR}
-    export DEVLIB=${S}
+do_configure() {
 }
+
+CFLAGS += "-std=gnu17"
+
+EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}include -I${S}src 'BUILDDIR=${S}'"
 
 do_compile:prepend() {
     export BUILD_SYS=${BUILD_SYS}

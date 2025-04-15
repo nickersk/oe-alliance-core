@@ -28,7 +28,7 @@ INITSCRIPT_PARAMS = "defaults 80"
 
 CXXFLAGS = " -std=c++11"
 
-do_configure:prepend () {
+do_configure() {
 }
 
 do_install () {

@@ -23,6 +23,9 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep
 
+do_configure() {
+}
+
 EXTRA_OEMAKE = " \
     CC='${CC}' LD='${LD} ${STAGING_LIBDIR}' XCFLAGS='${CFLAGS}' XLDFLAGS='${LDFLAGS}' \
     SYS=posix INC=-I=/usr/include DESTDIR=${D} CRYPTO=GNUTLS \

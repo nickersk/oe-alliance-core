@@ -18,5 +18,8 @@ PV = "3.21+gitr${SRCPV}"
 PKGV = "3.21+git${GITPKGV}"
 PR = "r0"
 
+do_configure() {
+}
+
 TARGET_CC_ARCH += "${LDFLAGS} -Wno-unused-result"
 EXTRA_OEMAKE = "NOTEST=1 NOPCSC=1 NODTAPI=1 NOSRT=1 MAIN_ARCH=${TUNE_PKGARCH} SYSROOT=${D}"
