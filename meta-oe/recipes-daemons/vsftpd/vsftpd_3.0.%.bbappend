@@ -4,7 +4,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://ftp.service"
 
 CFLAGS += "-std=gnu17"
-LDFLAGS:append =" -lssl -lcrypto"
+LDFLAGS:append = " -lssl -lcrypto"
 
 do_configure:prepend() {
     sed -i 's#undef VSF_BUILD_SSL#define VSF_BUILD_SSL#' ${S}/builddefs.h

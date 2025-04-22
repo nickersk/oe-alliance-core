@@ -61,17 +61,17 @@ PACKAGECONFIG[opengl] = "--enable-gl,--disable-gl,virtual/libgl"
 # trace is under GPLv3
 PACKAGECONFIG[trace] = "--enable-trace,--disable-trace"
 
+CFLAGS += "-std=gnu17"
+
 EXTRA_OECONF += " \
     ${@bb.utils.contains('TARGET_FPU', 'soft', '--disable-some-floating-point', '', d)} \
     --enable-tee \
 "
 
-CFLAGS += "-std=gnu17"
-
 # We don't depend on binutils so we need to disable this
-export ac_cv_lib_bfd_bfd_openr="no"
+export ac_cv_lib_bfd_bfd_openr = "no"
 # Ensure we don't depend on LZO
-export ac_cv_lib_lzo2_lzo2a_decompress="no"
+export ac_cv_lib_lzo2_lzo2a_decompress = "no"
 
 do_install:append () {
 	rm -rf ${D}${bindir}/cairo-sphinx
