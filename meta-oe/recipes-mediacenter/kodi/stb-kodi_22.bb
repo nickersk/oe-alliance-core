@@ -74,7 +74,7 @@ DEPENDS += " \
           "
 inherit gitpkgv
 # 22.0 Piers
-SRCREV = "4434c17e410287ca609bee8622d4b6841bf24a31"
+SRCREV = "01f13dec4f5051e0de16ab312c1d2ddfecb2ba79"
 
 # 'patch' doesn't support binary diffs
 PATCHTOOL = "git"
@@ -113,6 +113,7 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=master \
            file://0011-FindSmbClient-dont-use-pkgconfig-includedir.patch \
            file://0012-sigintfix-and-libinput-fix.patch \
            file://0013-texturepacker-dont-build-internal.patch \
+           file://0014-older-gl.patch \
            file://0100-stb-player.patch \
            file://0101-e2-player.patch \
            file://0102-gst-player.patch \
