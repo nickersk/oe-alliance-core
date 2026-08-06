@@ -7,6 +7,8 @@ SRCDATE = "20181224"
 
 COMPATIBLE_MACHINE = "^(sf8008|sf8008m)$"
 
+PACKAGE_ARCH = "${MACHINEBUILD}"
+
 inherit kernel machine_kernel_pr kernel-fixups
 
 MACHINE_KERNEL_PR:append = "35"
