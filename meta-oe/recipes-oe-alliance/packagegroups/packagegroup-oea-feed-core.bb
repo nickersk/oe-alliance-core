@@ -250,7 +250,7 @@ RDEPENDS:${PN} = "\
     zerotier \
     "
 
-WIREGUARD_MODULE = "${@bb.utils.contains_any("MACHINE", "osmini4k osmio4k osmio4kplus u5pvr", "", "wireguard-module", d)}"
+WIREGUARD_MODULE = "${@bb.utils.contains_any("MACHINEBUILD", "osmini4k osmio4k osmio4kplus u5pvr", "", "wireguard-module", d)}"
 
 STATIC_FEED_BUILD = "\
     ${@bb.utils.contains("MACHINE_FEATURES", "openhbbtv", "enigma2-plugin-extensions-openhbbtvbrowser", "", d)} \
