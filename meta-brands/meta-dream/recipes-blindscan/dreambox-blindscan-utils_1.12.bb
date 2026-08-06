@@ -8,9 +8,11 @@ DEPENDS = "ncurses"
 PR = "r4"
 
 SRC_URI += "https://source.mynonpublic.com/dreambox/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-dora"
+SRC_URI:dm7252s += "https://source.mynonpublic.com/dreambox/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-krogoth"
 SRC_URI:dm520 += "https://source.mynonpublic.com/dreambox/dm520/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-krogoth;downloadfilename=blindscan-utils_${PV}_${DEFAULTTUNE}_krogoth.tar.xz"
 SRC_URI:dm820 += "https://source.mynonpublic.com/dreambox/dm820/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-krogoth;downloadfilename=blindscan-utils_${PV}_${DEFAULTTUNE}_krogoth.tar.xz"
 SRC_URI:dm7080 += "https://source.mynonpublic.com/dreambox/dm7080/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-krogoth;downloadfilename=blindscan-utils_${PV}_${DEFAULTTUNE}_krogoth.tar.xz"
+SRC_URI:dms922x += "https://source.mynonpublic.com/dreambox/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-pyro"
 
 S = "${UNPACKDIR}/blindscan-utils_${PV}_${DEFAULTTUNE}"
 
