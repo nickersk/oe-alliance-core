@@ -26,4 +26,3 @@ do_install() {
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 FILES:${PN} += "${sysconfdir}/Wireless/mt7610uSTA/mt7610uSTACard.dat ${sysconfdir}/Wireless/mt7610uSTA/mt7610uSTA.dat ${sysconfdir}/Wireless/mt7610uSTA/SingleSKU.dat"
-
