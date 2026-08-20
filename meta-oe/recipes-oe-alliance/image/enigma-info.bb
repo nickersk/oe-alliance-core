@@ -36,12 +36,12 @@ UPX_VER = "${@d.getVar('PREFERRED_VERSION_upx').replace('%', '')}"
 do_install[nostamp] = "1"
 
 do_install() {
-    if [ "${MACHINE}" = "vusolo4k" -o "${MACHINE}" = "vusolo2" -o "${MACHINE}" = "vusolose" -o "${MACHINE}" = "vuduo2" -o "${MACHINE}" = "vuuno4k" -o "${MACHINE}" = "vuuno4kse" -o "${MACHINE}" = "vuultimo4k" -o "${MACHINE}" = "vuzero4k" -o "${MACHINE}" = "vuduo4k" -o "${MACHINE}" = "vuduo4kse" ]; then
-        DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-VUPLUS-BASE}/recipes-drivers/vuplus-dvb-proxy-${MACHINE}.bb | cut -b 12-19`
+    if [ "${MACHINEBUILD}" = "vusolo4k" -o "${MACHINE}" = "vusolo2" -o "${MACHINE}" = "vusolose" -o "${MACHINE}" = "vuduo2" -o "${MACHINE}" = "vuuno4k" -o "${MACHINE}" = "vuuno4kse" -o "${MACHINEBUILD}" = "vuultimo4k" -o "${MACHINE}" = "vuzero4k" -o "${MACHINEBUILD}" = "vuduo4k" -o "${MACHINEBUILD}" = "vuduo4kse" ]; then
+        DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-VUPLUS-BASE}/recipes-drivers/vuplus-dvb-proxy-${MACHINEBUILD}.bb | cut -b 12-19`
     elif [ "${MACHINE}" = "vuduo4klite" ]; then
         DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-VUPLUSDE-BASE}/recipes-drivers/vuplus-platform-util-${MACHINE}.bb | cut -b 12-19`
-     elif [ "${BRAND_OEM}" = "vuplus" ]; then
-        DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-VUPLUS-BASE}/recipes-drivers/vuplus-dvb-modules-${MACHINE}.bb | cut -b 12-19`
+    elif [ "${BRAND_OEM}" = "vuplus" ]; then
+        DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-VUPLUS-BASE}/recipes-drivers/vuplus-dvb-modules-${MACHINEBUILD}.bb | cut -b 12-19`
     elif [ "${BRAND_OEM}" = "amiko" ]; then
         DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-AMIKO-BASE}/recipes-drivers/amiko-dvb-modules-${MACHINE}.bb | cut -b 12-19`
     elif [ "${BRAND_OEM}" = "beyonwiz" ]; then
@@ -85,10 +85,10 @@ do_install() {
     elif [ "${MACHINE}" = "blackbox7405" ]; then
         DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-BLACKBOX-BASE}/recipes-drivers/blackbox-dvb-modules-blackbox7405.bb | cut -b 12-19`
     elif [ "${BRAND_OEM}" = "formuler" ]; then
-        if [ "${MACHINE}" = "formuler1" ] || [ "${MACHINE}" = "formuler3" ] || [ "${MACHINE}" = "formuler4" ]; then
-            DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-FORMULER-BASE}/recipes-drivers/formuler-dvb-modules-${MACHINE}.bb | cut -b 12-19`
+        if [ "${MACHINEBUILD}" = "formuler1" ] || [ "${MACHINEBUILD}" = "formuler3" ] || [ "${MACHINEBUILD}" = "formuler4" ]; then
+            DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-FORMULER-BASE}/recipes-drivers/formuler-dvb-modules-${MACHINEBUILD}.bb | cut -b 12-19`
         else
-            DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-FORMULER-BASE}/recipes-drivers/formuler-dvb-modules-al-${MACHINE}.bb | cut -b 12-19`
+            DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-FORMULER-BASE}/recipes-drivers/formuler-dvb-modules-al-${MACHINEBUILD}.bb | cut -b 12-19`
         fi
     elif [ "${BRAND_OEM}" = "skylake" ]; then
         DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-SKYLAKE-BASE}/recipes-drivers/skylake-dvb-modules-${MACHINE}.bb | cut -b 12-19`
@@ -115,7 +115,7 @@ do_install() {
     elif [ "${BRAND_OEM}" = "protek" ]; then
         DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-PROTEK-BASE}/recipes-drivers/protek-dvb-modules-${MACHINE}.bb | cut -b 12-19`
     elif [ "${BRAND_OEM}" = "edision" ]; then
-        DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-EDISION-BASE}/recipes-drivers/edision-dvb-modules-${MACHINE}.bb | cut -b 12-19`
+        DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-EDISION-BASE}/recipes-drivers/edision-dvb-modules-${MACHINEBUILD}.bb | cut -b 12-19`
     elif [ "${BRAND_OEM}" = "maxytec" ]; then
         DRIVERSDATE=`grep "SRCDATE = " ${OEA-META-MAXYTEC-BASE}/recipes-drivers/maxytec-dvb-modules-${MACHINE}.bb | cut -b 12-19`
     elif [ "${BRAND_OEM}" = "abcom" ]; then
