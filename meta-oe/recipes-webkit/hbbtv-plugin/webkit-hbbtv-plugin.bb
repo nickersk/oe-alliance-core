@@ -71,6 +71,17 @@ SRC_URI = "git://github.com/oe-alliance/enigma2-plugin-extensions-hbbtv-webkit.g
 do_package_qa() {
 }
 
+do_install:prepend() {
+    # WORKAROUND: upstream webkit-hbbtv-plugin repo still has per-MACHINEBUILD
+    # subdirs for our Phase-1 consolidations. The rename commits are local
+    # (branch=dev) but not yet pushed. Create the shared MACHINE-named subdir
+    # on the fly from the corresponding per-MACHINEBUILD subdir so
+    # ${S}/${MACHINE}/directfbrc resolves.
+    if [ ! -d ${S}/${MACHINE} ] && [ -d ${S}/${MACHINEBUILD} ]; then
+        cp -r ${S}/${MACHINEBUILD} ${S}/${MACHINE}
+    fi
+}
+
 do_install:append() {
     install -d ${D}${bindir}
     install -d ${D}/home/root
