@@ -29,7 +29,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     octagon-buildimage \
     e2fsprogs-resize2fs \
     gptfdisk \
-    ${@bb.utils.contains('MACHINE', 'sf8008', 'octagon-bluetooth-keymaps' , '', d)} \
+    ${@bb.utils.contains('MACHINEBUILD', 'sf8008', 'octagon-bluetooth-keymaps' , '', d)} \
 "
 
 MACHINE_FEATURES += "hisil switchoff hdmicec skins1080 ${E2EGL_WQHD_FEATURE} emmc mmc kodi22 alsa hbbtv-browser-webkit qtstalker qtnetflix openhbbtv event0 hisichromium mali HDMISTANDBY ${E2EGL_MACHINE_FEATURE}"
