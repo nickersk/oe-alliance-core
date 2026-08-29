@@ -39,7 +39,7 @@ RDEPENDS:${PN} = " \
     enigma2-plugin-extensions-atilehd \
     enigma2-plugin-extensions-enhancedmoviecenter \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dreamboxv1', 'mtd-utils-jffs2', '', d)} \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'dreamboxv1', bb.utils.contains_any('MACHINE', 'dm800se dm500hd', '', 'enigma2-plugin-extensions-dflash', d), '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'dreamboxv1', bb.utils.contains_any('MACHINEBUILD', 'dm800se dm500hd', '', 'enigma2-plugin-extensions-dflash', d), '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dreamboxv2', 'e2fsprogs-badblocks', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'grautec', 'enigma2-plugin-extensions-grautec', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dvbc-only', '', 'enigma2-plugin-extensions-programmlistenupdater', d)} \
