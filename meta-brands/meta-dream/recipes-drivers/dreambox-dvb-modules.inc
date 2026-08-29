@@ -5,7 +5,7 @@ PRIORITY = "required"
 INC_PR = "r8"
 require conf/license/license-close.inc
 
-PRECOMPILED_ARCH ?= "${MACHINE}"
+PRECOMPILED_ARCH ?= "${MACHINEBUILD}"
 PRECOMPILED_VERSION ?= "${PV}"
 
 DREAMBOX_DVB_MODULES_MIRROR ?= "https://source.mynonpublic.com/dreambox"
@@ -35,7 +35,7 @@ do_install() {
 
 PACKAGES = "${PN}"
 
-RDEPENDS:${PN} += "dreambox-secondstage-${MACHINE} kernel-vmlinux"
+RDEPENDS:${PN} += "dreambox-secondstage-${MACHINEBUILD} kernel-vmlinux"
 
 # We don't use KERNEL_VERSION in this recipe, because the
 # precompiled modules depend on a specific version.
