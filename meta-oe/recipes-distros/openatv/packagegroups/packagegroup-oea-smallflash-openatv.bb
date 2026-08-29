@@ -31,6 +31,7 @@ RDEPENDS:${PN} = " \
     enigma2-plugin-systemplugins-hotplug \
     enigma2-plugin-extensions-mediascanner \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dreamboxv1', 'mtd-utils-jffs2', '', d)} \
+
     ${@bb.utils.contains('MACHINE_FEATURES', 'dreamboxv2', 'e2fsprogs-badblocks', '', d)} \
 "
 
