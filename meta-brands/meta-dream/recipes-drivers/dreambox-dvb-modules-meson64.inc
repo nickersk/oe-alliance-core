@@ -5,7 +5,7 @@ PRIORITY = "required"
 
 inherit opendreambox-precompiled-binary4
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+PACKAGE_ARCH = "${MACHINEBUILD}"
 
 PACKAGES =+ "${PN}-firmware ${PN}-fp ${PN}-lcd ${PN}-stb-core"
 
