@@ -1,0 +1,18 @@
+--- a/common/threading.h
++++ b/common/threading.h
+@@ -85,7 +85,14 @@ int64_t no_atomic_add64(int64_t* ptr, int64_t val);
+ #define ATOMIC_AND(ptr, mask) __sync_fetch_and_and(ptr, mask)
+ #define ATOMIC_INC(ptr)       __sync_add_and_fetch((volatile int32_t*)ptr, 1)
+ #define ATOMIC_DEC(ptr)       __sync_add_and_fetch((volatile int32_t*)ptr, -1)
+-#define ATOMIC_ADD(ptr, val)  __sync_fetch_and_add((volatile __typeof__(*(ptr))*)ptr, (__typeof__(*(ptr) + 0))(val))
++#if defined(__mips__) && !defined(__mips64)
++#define ATOMIC_ADD64(ptr, val) __atomic_fetch_add(ptr, val, __ATOMIC_SEQ_CST)
++#else
++#define ATOMIC_ADD64(ptr, val) __sync_fetch_and_add(ptr, val)
++#endif
++#define ATOMIC_ADD(ptr, val)  (sizeof(*(ptr)) == 8 ? \
++                               ATOMIC_ADD64((volatile __typeof__(*(ptr))*)ptr, (__typeof__(*(ptr) + 0))(val)) : \
++                               __sync_fetch_and_add((volatile __typeof__(*(ptr))*)ptr, (__typeof__(*(ptr) + 0))(val)))
+ #define GIVE_UP_TIME()        usleep(0)
+ 
+ #elif defined(_MSC_VER)       /* Windows atomic intrinsics */
