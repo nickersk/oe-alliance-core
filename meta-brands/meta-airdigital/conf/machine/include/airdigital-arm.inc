@@ -18,6 +18,11 @@ PREFERRED_PROVIDER_virtual/libgbm ?= "airdigital-v3ddriver-${MACHINE}"
 PREFERRED_PROVIDER_virtual/libgl ?= "mesa"
 PREFERRED_PROVIDER_virtual/mesa ?= "mesa"
 
+MACHINE_EXTRA_RRECOMMENDS += " \
+    gstreamer1.0-plugin-dvbmediasink \
+    gstreamer1.0-libav \
+    "
+
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'arm-recovery', 'airdigital-recovery-${MACHINE_DRIVER}' , '', d)} \
     "

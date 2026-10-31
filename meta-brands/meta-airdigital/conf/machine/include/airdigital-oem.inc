@@ -219,10 +219,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'v3d-nxpl', 'airdigital-v3ddriver-${MACHINE}' , '', d)} \
     "
 
-MACHINE_EXTRA_RRECOMMENDS += " \
-    gstreamer1.0-plugin-dvbmediasink \
-    "
-
 include conf/machine/include/autoload-filesystems.inc
 require conf/machine/include/soc-family.inc
 require conf/machine/box-hardware.inc
