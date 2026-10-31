@@ -24,6 +24,10 @@ PREFERRED_PROVIDER_virtual/mesa ?= "mesa"
 
 IMAGE_FSTYPES ?= "ubi"
 
+MACHINE_EXTRA_RRECOMMENDS += " \
+    gstreamer1.0-plugin-dvbmediasink \
+    "
+
 IMAGE_CMD:ubifs:prepend = " \
 	mkdir -p ${IMAGE_ROOTFS}/usr/lib; \
 	if [ "${PACKAGE_LIST}" = "1" ]; then \
