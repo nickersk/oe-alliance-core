@@ -1,0 +1,62 @@
+audio: fix build with HFP support disabled
+
+The HFP MediaEndpoint support added in 5.88 is only compiled when HFP is
+enabled, but media.c references its functions unconditionally. Guard the
+HFP-specific code with HAVE_HFP so that --disable-hfp builds again.
+
+Upstream-Status: Pending
+
+--- a/profiles/audio/media.c
++++ b/profiles/audio/media.c
+@@ -238,10 +238,12 @@
+ 		endpoint->pac = NULL;
+ 	}
+ 
++#ifdef HAVE_HFP
+ 	if (endpoint->sco) {
+ 		hfp_hf_sco_remove(endpoint->adapter->btd_adapter, endpoint);
+ 		endpoint->sco = false;
+ 	}
++#endif
+ 
+ 	g_dbus_remove_watch(btd_get_dbus_connection(), endpoint->watch);
+ 	g_free(endpoint->capabilities);
+@@ -1457,6 +1459,7 @@
+ 	return true;
+ }
+ 
++#ifdef HAVE_HFP
+ gboolean hfp_hf_set_configuration(struct media_endpoint *endpoint,
+ 					const char *ep_path,
+ 					media_endpoint_cb_t cb,
+@@ -1500,7 +1503,9 @@
+ 	return media_endpoint_async_call(msg, endpoint, transport,
+ 						cb, user_data, destroy, -1);
+ }
++#endif
+ 
++#ifdef HAVE_HFP
+ static bool endpoint_init_sco(struct media_endpoint *endpoint,
+ 						int *err)
+ {
+@@ -1514,6 +1519,7 @@
+ 
+ 	return hfp_hf_sco_listen(endpoint->adapter->btd_adapter, endpoint);
+ }
++#endif
+ 
+ static bool endpoint_properties_exists(const char *uuid,
+ 						struct btd_device *dev,
+@@ -1644,10 +1650,12 @@
+ 	return g_dbus_get_flags() & G_DBUS_FLAG_ENABLE_EXPERIMENTAL;
+ }
+ 
++#ifdef HAVE_HFP
+ static bool experimental_sco_supported(struct btd_adapter *adapter)
+ {
+ 	return g_dbus_get_flags() & G_DBUS_FLAG_ENABLE_EXPERIMENTAL;
+ }
++#endif
+ 
+ static const struct media_endpoint_init {
+ 	const char *uuid;
