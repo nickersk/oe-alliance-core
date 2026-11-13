@@ -2,7 +2,10 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 # BlueZ ships attach drivers for ST, TI, Atheros, Qualcomm, Intel and Broadcom
 # but none for Realtek, which receivers with a built-in Realtek module need.
-SRC_URI:append = " file://0001-tools-Add-support-for-rtk_h5-type.patch"
+SRC_URI:append = " \
+    file://0001-tools-Add-support-for-rtk_h5-type.patch \
+    file://0002-media-Fix-build-with-HFP-disabled.patch \
+"
 
 # These libreader versions identify Bluetooth audio devices by their AVRCP
 # input name, which must contain the remote Bluetooth address.
@@ -32,6 +35,9 @@ PACKAGECONFIG ?= "\
     tools \
     udev \
 "
+
+# oe-core 5.88 dropped this mapping although configure still supports it.
+PACKAGECONFIG[deprecated] = "--enable-deprecated,--disable-deprecated"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/bluetooth/
