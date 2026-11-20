@@ -6,8 +6,8 @@ PACKAGES += " \
             ${@bb.utils.contains("DISTRO_FEATURES", "smbfs", "packagegroup-base-samba", "", d)} \
             "
 
-RDEPENDS:packagegroup-base := "${@oe.utils.str_filter_out('packagegroup-base-nfs', '${RDEPENDS:packagegroup-base}', d)}"
-RDEPENDS:packagegroup-base := "${@oe.utils.str_filter_out('packagegroup-base-smbfs', '${RDEPENDS:packagegroup-base}', d)}"
+RDEPENDS:packagegroup-base := "${@oe.utils.str_filter_out('packagegroup-base-nfs', '${RDEPENDS:packagegroup-base}')}"
+RDEPENDS:packagegroup-base := "${@oe.utils.str_filter_out('packagegroup-base-smbfs', '${RDEPENDS:packagegroup-base}')}"
 
 RDEPENDS:packagegroup-base-smbfs += "\
     cifs-utils \
