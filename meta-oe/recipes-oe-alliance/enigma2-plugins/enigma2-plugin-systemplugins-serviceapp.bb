@@ -19,6 +19,8 @@ SRC_URI:teamblue = "git://github.com/teamblue-e2/serviceapp.git;branch=7.4;proto
 SRC_URI:opendroid = "git://github.com/opendroid-Team/serviceapp.git;branch=sig3;protocol=https"
 SRC_URI:openhdf = "git://github.com/teamblue-e2/serviceapp.git;branch=7.4;protocol=https"
 
+SRC_URI:append = " file://0002-fix-PyUnicode_AsDecodedObject-for-Python-3.15.patch"
+
 inherit autotools gitpkgv python3native pkgconfig gettext python3targetconfig
 
 CXXFLAGS += "${@bb.utils.contains_any("DISTRO_NAME", "openatv openspa openvix openbh teamblue opendroid openhdf", "" , " -std=c++11", d)}"

@@ -1,0 +1,45 @@
+--- a/src/serviceapp/common.cpp
++++ b/src/serviceapp/common.cpp
+@@ -221,37 +221,22 @@
+ #ifndef NO_PYTHON
+ int convertToUTF8(const std::string &input_string, const std::string &input_encoding, std::string &output_string)
+ {
+-    PyObject *py_string, *py_unicode;
+-    py_string = PyUnicode_FromStringAndSize(input_string.c_str(), input_string.length());
+-    if (py_string == NULL)
+-    {
+-        PyErr_Print();
+-        return 1;
+-    }
+-
+-    // NEW
+-    //py_unicode = PyCodec_Decode(py_string, input_encoding.c_str(), "strict");
+-
+-    // PyUnicode_AsDecodedObject is deprecated
+-    py_unicode = PyUnicode_AsDecodedObject(py_string, input_encoding.c_str(), "strict");
+-
++    PyObject *py_unicode = PyUnicode_Decode(input_string.c_str(), input_string.length(), input_encoding.c_str(), "strict");
+     if (py_unicode == NULL)
+     {
+-        Py_DECREF(py_string);
+         PyErr_Print();
+         return 1;
+     }
+-    Py_DECREF(py_string);
+-    py_string = PyUnicode_AsUTF8String(py_unicode);
+-    if (py_string == NULL)
++    PyObject *py_utf8 = PyUnicode_AsUTF8String(py_unicode);
++    if (py_utf8 == NULL)
+     {
+         Py_DECREF(py_unicode);
+         PyErr_Print();
+         return 1;
+     }
++    output_string.assign(PyBytes_AsString(py_utf8), PyBytes_Size(py_utf8));
+     Py_DECREF(py_unicode);
+-    output_string = PyUnicode_AsUTF8(py_string);
+-    Py_DECREF(py_string);
++    Py_DECREF(py_utf8);
+     return 0;
+ }
+ 
