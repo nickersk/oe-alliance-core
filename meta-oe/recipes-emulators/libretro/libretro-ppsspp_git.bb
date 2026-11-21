@@ -3,7 +3,7 @@ DESCRIPTION = "Experimental Sony PlayStation Portable emulator core."
 HOMEPAGE = "https://github.com/hrydgard/ppsspp"
 
 LICENSE = "GPL-2.0-or-later"
-PR = "r3"
+PR = "r4"
 LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=e336f8162cddec7981e240f46825d8a2"
 
 SRC_URI = "gitsm://github.com/hrydgard/ppsspp.git;protocol=https;branch=master \
@@ -26,6 +26,11 @@ PPSSPP_PLATFORM = "${@'arm64-gles' if d.getVar('TARGET_ARCH') == 'aarch64' else 
 PPSSPP_TARGET_ARCH = "${@'arm64' if d.getVar('TARGET_ARCH') == 'aarch64' else 'armv7'}"
 
 do_compile() {
+    oe_runmake -C ${S}/libretro \
+        platform=${PPSSPP_PLATFORM} \
+        TARGET_ARCH=${PPSSPP_TARGET_ARCH} \
+        GLEW_EGL=1 \
+        clean
     oe_runmake -C ${S}/libretro \
         platform=${PPSSPP_PLATFORM} \
         TARGET_ARCH=${PPSSPP_TARGET_ARCH} \
