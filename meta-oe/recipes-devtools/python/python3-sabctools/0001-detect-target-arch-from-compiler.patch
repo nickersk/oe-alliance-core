@@ -1,0 +1,46 @@
+Detect the target architecture from compiler predefined macros instead of
+CMAKE_SYSTEM_PROCESSOR, which reports the build host's architecture when
+cross-compiling. Otherwise x86 SIMD flags are applied to ARM and MIPS builds and
+the cross-compiler rejects them.
+
+Upstream-Status: Inappropriate [cross-compile specific]
+
+--- a/extern/rapidyenc/CMakeLists.txt
++++ b/extern/rapidyenc/CMakeLists.txt
+@@ -21,10 +21,33 @@
+ 	set(CMAKE_BUILD_TYPE Release)
+ endif()
+ if(NOT TARGET_ARCH)
+-	if(CMAKE_GENERATOR_PLATFORM)
+-		set(TARGET_ARCH ${CMAKE_GENERATOR_PLATFORM})
++	# Detect the target architecture from compiler predefined macros. This is
++	# reliable when cross-compiling, unlike CMAKE_SYSTEM_PROCESSOR which
++	# reports the build host's architecture.
++	CHECK_CXX_SYMBOL_EXISTS(__x86_64__ "" COMPILER_IS_X86_64)
++	CHECK_CXX_SYMBOL_EXISTS(__i386__ "" COMPILER_IS_X86_32)
++	CHECK_CXX_SYMBOL_EXISTS(__aarch64__ "" COMPILER_IS_AARCH64)
++	CHECK_CXX_SYMBOL_EXISTS(__arm__ "" COMPILER_IS_ARM)
++	CHECK_CXX_SYMBOL_EXISTS(__riscv "" COMPILER_IS_RISCV)
++	CHECK_CXX_SYMBOL_EXISTS(__mips__ "" COMPILER_IS_MIPS)
++	if(COMPILER_IS_X86_64)
++		set(TARGET_ARCH x86_64)
++	elseif(COMPILER_IS_X86_32)
++		set(TARGET_ARCH i386)
++	elseif(COMPILER_IS_AARCH64)
++		set(TARGET_ARCH aarch64)
++	elseif(COMPILER_IS_ARM)
++		set(TARGET_ARCH arm)
++	elseif(COMPILER_IS_RISCV)
++		set(TARGET_ARCH riscv)
++	elseif(COMPILER_IS_MIPS)
++		set(TARGET_ARCH mips)
+ 	else()
+-		set(TARGET_ARCH ${CMAKE_SYSTEM_PROCESSOR})
++		if(CMAKE_GENERATOR_PLATFORM)
++			set(TARGET_ARCH ${CMAKE_GENERATOR_PLATFORM})
++		else()
++			set(TARGET_ARCH ${CMAKE_SYSTEM_PROCESSOR})
++		endif()
+ 	endif()
+ endif()
+ 
