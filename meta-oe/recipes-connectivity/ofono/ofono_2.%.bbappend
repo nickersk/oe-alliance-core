@@ -1,3 +1,3 @@
 EXTRA_OECONF += " --disable-udev"
 
-DEPENDS := "${@oe.utils.str_filter_out('udev', '${DEPENDS}')}"
+DEPENDS := "${@' '.join(x for x in d.getVar('DEPENDS').split() if not x.startswith('udev'))}"
