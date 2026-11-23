@@ -281,11 +281,11 @@ def oea_repositories_info(d):
             e2_url = '%s://%s%s' % (proto, host, path)
             e2_name = _reponame(e2_url) or 'enigma2'
             try:
-                import bb.fetch2
+                import bb.fetch
                 # slash-collapse to match git.py:_revision_key
                 collapsed = re.sub(r'/+', '.', path)
                 key = 'git:' + host + collapsed + e2_branch
-                sha = bb.fetch2._revisions_cache.get_rev(key)
+                sha = bb.fetch._revisions_cache.get_rev(key)
                 if sha:
                     dl = d.getVar('DL_DIR') or ''
                     mirror = os.path.join(dl, 'git2', host + collapsed)

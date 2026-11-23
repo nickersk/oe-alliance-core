@@ -66,14 +66,14 @@ def gitpkgv_drop_tag_prefix(d, version):
 
 def get_git_pkgv(d, use_tags):
     import os
-    import bb
+    import bb.fetch
     from shlex import quote
 
     src_uri = d.getVar('SRC_URI').split()
     unpackdir = d.getVar('UNPACKDIR')
     def_destsuffix = (d.getVar("BB_GIT_DEFAULT_DESTSUFFIX") or "git") + "/"
 
-    fetcher = bb.fetch2.Fetch(src_uri, d)
+    fetcher = bb.fetch.Fetch(src_uri, d)
     ud = fetcher.ud
 
     #
@@ -108,11 +108,11 @@ def get_git_pkgv(d, use_tags):
             vars = { 'repodir' : quote(destdir),
                      'rev' : quote(url.revision) }
 
-            rev = bb.fetch2.get_srcrev(d).split('+')[1]
+            rev = bb.fetch.get_srcrev(d).split('+')[1]
             rev_file = os.path.join(destdir, "oe-gittag_" + url.revision)
 
             if not os.path.exists(rev_file) or os.path.getsize(rev_file)==0:
-                commits = bb.fetch2.runfetchcmd(
+                commits = bb.fetch.runfetchcmd(
                     "git -C %(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
                     % vars, d, quiet=True).strip().lstrip('0')
 
@@ -129,7 +129,7 @@ def get_git_pkgv(d, use_tags):
             if use_tags:
                 prefix = d.getVar('GITPKGV_PREFIX')
                 try:
-                    output = bb.fetch2.runfetchcmd(
+                    output = bb.fetch.runfetchcmd(
                         "git -C %(repodir)s describe %(rev)s --tags 2>/dev/null"
                         % vars, d, quiet=True).strip()
                     ver = gitpkgv_drop_tag_prefix(d, output)
