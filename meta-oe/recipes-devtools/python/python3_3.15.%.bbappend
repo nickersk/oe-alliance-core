@@ -5,15 +5,6 @@ PACKAGECONFIG = "readline gdbm ${@bb.utils.filter('DISTRO_FEATURES', 'lto', d)}"
 
 inherit python3-dir
 
-FILES:${PN}-src += " \
-    ${libdir}/${PYTHON_DIR}/*.py \
-    ${libdir}/${PYTHON_DIR}/*/*.py \
-    ${libdir}/${PYTHON_DIR}/*/*/*.py \
-    ${libdir}/${PYTHON_DIR}/*/*/*/*.py \
-    ${libdir}/${PYTHON_DIR}/*/*/*/*/*.py \
-    ${libdir}/${PYTHON_DIR}/*/*/*/*/*/*.py \
-    "
-
 # for importlib patch
 # add dummy __pycache__ files to make rm happy later...
 do_install:prepend() {
