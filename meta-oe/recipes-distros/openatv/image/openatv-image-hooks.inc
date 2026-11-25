@@ -6,6 +6,7 @@ inherit openatv-image-info
 # The SmallBox companion has its own rootfs and writes its own information.
 # Do not let the internal image's prefix wildcard pick up that separate ZIP.
 OPENATV_IMAGE_INFO_EXCLUDE = "${DISTRO_NAME}-${IMAGE_VERSION}-${MACHINEBUILD}-${DATE}_multiboot.zip"
+OPENATV_IMAGE_INFO_EXCLUDE[vardepsexclude] += "DATE"
 
 # Apply the native SmallBox bootstrap only to OpenATV's main image recipe.
 # Other OE-Alliance distributions retain their existing SmallFlash images.

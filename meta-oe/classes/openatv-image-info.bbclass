@@ -108,4 +108,5 @@ python openatv_image_info() {
 }
 
 IMAGE_POSTPROCESS_COMMAND:append = " openatv_image_info"
+openatv_image_info[vardepsexclude] += "DATE"
 do_image_complete[depends] += "zip-native:do_populate_sysroot"
