@@ -14,3 +14,5 @@ SRC_URI[md5sum] = "de27c5fb24b062b4fb5db15a67914007"
 SRC_URI[sha256sum] = "4836a45c09b20a7ee89d0f1d18558fc854f3afbf4aca373b5744fe1b52323c84"
 
 include python3-package-split.inc
+
+INSANE_SKIP:${PN} = "already-stripped"
